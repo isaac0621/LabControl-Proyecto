@@ -1,0 +1,7 @@
+{
+  "name": "LabControlMobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
