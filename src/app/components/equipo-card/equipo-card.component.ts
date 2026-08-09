@@ -1,34 +1,28 @@
-import { Component, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { Equipo } from '../../models/equipo.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Responsable } from '../../models/responsable.model';
 
-@Component({
-  selector: 'app-equipo-card',
-  template: `
-    <!-- Tarjeta de Ionic para mostrar los datos clave -->
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{ equipo.nombre }}</ion-card-title>
-        <ion-card-subtitle>{{ equipo.marca }} - {{ equipo.modelo }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <p><strong>N/S:</strong> {{ equipo.numeroSerie }}</p>
-        
-        <div class="actions">
-          <!-- Botón que navega al detalle usando el ID del equipo -->
-          <ion-button fill="clear" [routerLink]="['/equipo-detalle', equipo.id]">
-            Ver Detalles
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  `,
-  standalone: true,
-  imports: [IonicModule, CommonModule, RouterModule]
+@Injectable({
+  providedIn: 'root'
 })
-export class EquipoCardComponent {
-  // Recibe la información del equipo desde la página padre
-  @Input({ required: true }) equipo!: Equipo; 
+export class ResponsableService {
+  private readonly apiUrl = 'http://labcontrolwebsac.somee.com/Responsables';
+
+  constructor(private http: HttpClient) { }
+
+  // Obtener lista completa de responsables (GET)
+  obtenerResponsables(): Observable<Responsable[]> {
+    return this.http.get<Responsable[]>(this.apiUrl);
+  }
+
+  // Obtener un responsable específico por su ID (GET)
+  obtenerResponsablePorId(id: number): Observable<Responsable> {
+    return this.http.get<Responsable>(`${this.apiUrl}/${id}`);
+  }
+
+  // Registrar un nuevo responsable (POST)
+  crearResponsable(responsable: Responsable): Observable<Responsable> {
+    return this.http.post<Responsable>(this.apiUrl, responsable);
+  }
 }

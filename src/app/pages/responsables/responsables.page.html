@@ -1,13 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>responsables</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Responsables</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">responsables</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Indicador de carga exigido por la rúbrica -->
+  <div *ngIf="cargando" class="ion-text-center ion-padding">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando responsables...</p>
+  </div>
+
+  <ion-list *ngIf="!cargando && responsables.length > 0">
+    <ion-item *ngFor="let res of responsables">
+      <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{ res.nombre }} {{ res.primerApellido }} {{ res.segundoApellido }}</h2>
+        <p>ID: {{ res.identificacion }} | Tel: {{ res.telefono }}</p>
+        <p>Tipo: <ion-badge color="secondary">{{ res.tipoResponsable }}</ion-badge></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Mensaje si la lista está vacía -->
+  <div *ngIf="!cargando && responsables.length === 0" class="ion-text-center ion-padding">
+    <ion-icon name="warning-outline" size="large"></ion-icon>
+    <p>No hay responsables registrados.</p>
+  </div>
+
+  <!-- Botón flotante para agregar un nuevo responsable -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/responsable-form">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
