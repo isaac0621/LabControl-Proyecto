@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://apiweb-sac.somee.com', // Swagger UI: http://apiweb-sac.somee.com/swagger/index.html
 };
 
 /*
