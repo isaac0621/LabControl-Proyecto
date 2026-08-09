@@ -8,7 +8,7 @@ import { Equipo } from '../models/equipo.model';
 })
 export class EquipoService {
   // Asegúrate de cambiar esto por la IP o dominio de tu API ASP.NET Core
-  private apiUrl = 'https://tu-api-rest.com/api/equipos'; 
+  private apiUrl = 'http://apiweb-sac.somee.com/api/equipos'; 
 
   constructor(private http: HttpClient) { }
 
