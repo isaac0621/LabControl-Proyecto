@@ -1,13 +1,75 @@
 <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Equipos</ion-title>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>equipos</ion-title>
+    <ion-searchbar 
+      placeholder="Buscar por código o nombre..." 
+      (ionInput)="onSearchChange($event)"
+      [debounce]="300"
+      animated="true">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">equipos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="ion-text-center ion-padding" *ngIf="isLoading && !equipos.length">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando equipos...</p>
+  </div>
+
+  <div class="ion-text-center ion-padding" *ngIf="hasError">
+    <ion-icon name="alert-circle-outline" color="danger" size="large"></ion-icon>
+    <p>Error al cargar los datos.</p>
+    <ion-button (click)="loadEquipos()" fill="outline">Reintentar</ion-button>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && filteredEquipos.length === 0" class="ion-text-center ion-padding">
+    <p>No se encontraron equipos.</p>
+  </div>
+
+  <ion-card *ngFor="let equipo of filteredEquipos">
+    <ion-card-header>
+      <div class="card-header-flex">
+        <ion-card-subtitle>{{ equipo.codigo }}</ion-card-subtitle>
+        <ion-badge [color]="getColorEstado(equipo.estadoEquipo)">
+          {{ equipo.estadoEquipo || 'Desconocido' }}
+        </ion-badge>
+      </div>
+      <ion-card-title>{{ equipo.nombreEquipo }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Marca:</strong> {{ equipo.marca || 'N/A' }}</p>
+      <p><strong>Categoría:</strong> {{ equipo.categoria || 'N/A' }}</p>
+      <p><strong>Ubicación:</strong> {{ equipo.ubicacion || 'N/A' }}</p>
+
+      <div class="action-buttons">
+        <ion-button fill="clear" size="small" color="primary" (click)="verDetalle(equipo)">
+          <ion-icon slot="start" name="eye-outline"></ion-icon>
+          Detalle
+        </ion-button>
+        
+        <ion-button fill="clear" size="small" color="secondary" (click)="editarEquipo(equipo)">
+          <ion-icon slot="start" name="create-outline"></ion-icon>
+          Editar
+        </ion-button>
+
+        <ion-button fill="clear" size="small" color="danger" (click)="confirmarEliminar(equipo)">
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
+          Eliminar
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/tabs/registrar-equipo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

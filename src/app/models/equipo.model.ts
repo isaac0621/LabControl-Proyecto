@@ -1,10 +1,22 @@
 export interface Equipo {
-  id?: number;
-  nombre: string;
-  marca: string;
+  idEquipo?: number;
+  codigo: string;
+  nombreEquipo: string;
+  descripcion?: string | null;
+  marca?: string | null;
   modelo: string;
-  numeroSerie: string;
-  categoriaId: number;
-  ubicacionId: number;
-  estadoEquipoId: number;
+  serie: string;
+  numeroActivo?: string | null;
+  fechaRegistro?: string | null;
+  fechaCompra?: string | null;
+  valorEstimado?: number | null;
+  fotoUrl?: string | null;
+  observaciones?: string | null;
+  activo: boolean;
+  idCategoria: number;
+  categoria?: string;
+  idUbicacion: number;
+  ubicacion?: string;
+  idEstadoEquipo: number;
+  estadoEquipo?: string;
 }
