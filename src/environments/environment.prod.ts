@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://apiweb-sac.somee.com', // Swagger UI: http://apiweb-sac.somee.com/swagger/index.html
+  // En producción (dispositivo móvil o hosting) el CORS se maneja de forma distinta, 
+  // aquí sí apuntamos a la URL completa
+  apiUrl: 'http://apiweb-sac.somee.com'
 };

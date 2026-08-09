@@ -5,8 +5,8 @@ import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar,
   IonRefresher, IonRefresherContent, IonCard, IonCardHeader,
   IonCardTitle, IonCardSubtitle, IonCardContent, IonButton,
-  IonIcon, IonSpinner, IonBadge, IonFab, IonFabButton, IonText,
-  AlertController, ToastController, IonButtons
+  IonIcon, IonSpinner, IonBadge, IonFab, IonFabButton,
+  AlertController, ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, createOutline, trashOutline, eyeOutline, alertCircleOutline } from 'ionicons/icons';
@@ -25,7 +25,7 @@ import { Router, RouterModule } from '@angular/router';
     IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
     IonSearchbar, IonRefresher, IonRefresherContent, IonCard, IonCardHeader,
     IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon,
-    IonSpinner, IonBadge, IonFab, IonFabButton, IonText, IonButtons,
+    IonSpinner, IonBadge, IonFab, IonFabButton,
     RouterModule
   ]
 })

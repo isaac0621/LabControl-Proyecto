@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "http://apiweb-sac.somee.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

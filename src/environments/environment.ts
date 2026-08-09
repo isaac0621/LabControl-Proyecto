@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://apiweb-sac.somee.com', // Swagger UI: http://apiweb-sac.somee.com/swagger/index.html
+  // Utilizamos un path relativo para que el proxy en local evite el problema de CORS
+  apiUrl: '', 
 };
 
 /*
