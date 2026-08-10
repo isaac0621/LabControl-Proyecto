@@ -1,0 +1,33 @@
+<ion-card>
+  <ion-card-header>
+    <div class="header-container">
+      <div>
+        <ion-card-subtitle>{{ equipo.codigo }} | {{ equipo.categoria || 'Sin categoría' }}</ion-card-subtitle>
+        <ion-card-title>{{ equipo.nombreEquipo }}</ion-card-title>
+      </div>
+      <ion-badge [color]="getColorEstado(equipo.estadoEquipo)">
+        {{ equipo.estadoEquipo || 'Desconocido' }}
+      </ion-badge>
+    </div>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item lines="none" class="ion-no-padding">
+      <ion-label>
+        <p><strong>Ubicación:</strong> {{ equipo.ubicacion || 'No asignada' }}</p>
+        <p><strong>Marca/Modelo:</strong> {{ equipo.marca || 'N/A' }} {{ equipo.modelo || '' }}</p>
+      </ion-label>
+    </ion-item>
+    
+    <div class="action-buttons">
+      <ion-button fill="clear" color="primary" (click)="onEditar()">
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        Editar
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="onEliminar()">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Eliminar
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

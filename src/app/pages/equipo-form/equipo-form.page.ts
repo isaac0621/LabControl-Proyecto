@@ -1,7 +1,14 @@
 import { Component, OnInit, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { IonicModule, ToastController, NavController } from '@ionic/angular';
+import { 
+  IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, 
+  IonContent, IonList, IonListHeader, IonLabel, IonItem, 
+  IonInput, IonTextarea, IonSelect, IonSelectOption, IonToggle, 
+  IonButton, IonIcon, ToastController, NavController 
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { saveOutline } from 'ionicons/icons';
 
 // Modelos
 import { Equipo } from '../../models/equipo.model';
@@ -20,12 +27,19 @@ import { EstadoEquipoService } from '../../services/estado-equipo.service';
   templateUrl: './equipo-form.page.html',
   styleUrls: ['./equipo-form.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, 
+    IonContent, IonList, IonListHeader, IonLabel, IonItem, 
+    IonInput, IonTextarea, IonSelect, IonSelectOption, IonToggle, 
+    IonButton, IonIcon
+  ]
 })
 export class EquipoFormPage implements OnInit {
   @ViewChild('equipoForm', { static: false }) equipoForm!: NgForm;
 
-  // Inyección de dependencias
+  // Inyección de dependencias usando la función inject()
   private equipoService = inject(EquipoService);
   private categoriaService = inject(CategoriaService);
   private ubicacionService = inject(UbicacionService);
@@ -41,6 +55,10 @@ export class EquipoFormPage implements OnInit {
   // Objeto del formulario
   equipo: Equipo = this.getInitialEquipo();
 
+  constructor() {
+    addIcons({ saveOutline });
+  }
+
   ngOnInit() {
     this.cargarCatalogos();
   }
@@ -48,18 +66,43 @@ export class EquipoFormPage implements OnInit {
   // Método para cargar los catálogos en los selects
   cargarCatalogos() {
     this.categoriaService.getCategorias().subscribe({
-      next: (data) => this.categorias.set(data),
-      error: () => this.mostrarToast('Error al cargar categorías', 'danger')
+      next: (data) => {
+        console.log('Categorias cargadas:', data);
+        this.categorias.set(data);
+      },
+      error: (err) => {
+        console.error('Error cargando categorias:', err);
+        this.mostrarToast('Error al cargar categorías', 'danger');
+      }
     });
 
     this.ubicacionService.getUbicaciones().subscribe({
-      next: (data) => this.ubicaciones.set(data),
-      error: () => this.mostrarToast('Error al cargar ubicaciones', 'danger')
+      next: (data) => {
+        console.log('Ubicaciones cargadas:', data);
+        this.ubicaciones.set(data);
+      },
+      error: (err) => {
+        console.error('Error cargando ubicaciones desde la API (Fallo en el backend):', err);
+        this.mostrarToast('API de Ubicaciones falló. Cargando datos de prueba...', 'warning');
+        
+        // Mock de ubicaciones como solución temporal por el Error 500 del Backend
+        this.ubicaciones.set([
+          { idUbicacion: 1, nombreUbicacion: 'Laboratorio A (Mock)' },
+          { idUbicacion: 2, nombreUbicacion: 'Laboratorio B (Mock)' },
+          { idUbicacion: 3, nombreUbicacion: 'Oficina Principal (Mock)' }
+        ]);
+      }
     });
 
     this.estadoEquipoService.getEstadosEquipo().subscribe({
-      next: (data) => this.estadosEquipo.set(data),
-      error: () => this.mostrarToast('Error al cargar estados', 'danger')
+      next: (data) => {
+        console.log('Estados cargados:', data);
+        this.estadosEquipo.set(data);
+      },
+      error: (err) => {
+        console.error('Error cargando estados:', err);
+        this.mostrarToast('Error al cargar estados', 'danger');
+      }
     });
   }
 

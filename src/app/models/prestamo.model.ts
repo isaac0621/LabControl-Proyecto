@@ -1,9 +1,26 @@
+import { Equipo } from './equipo.model';
+import { Responsable } from './responsable.model';
+
 export interface Prestamo {
-  id?: number;
-  equipoId: number;
-  responsableId: number;
-  fechaPrestamo: string; 
-  fechaDevolucionEsperada?: string;
-  fechaDevolucionReal?: string;
-  estado: string; // Ej: 'Activo', 'Devuelto'
+  idPrestamo?: number;
+  idEquipo: number;
+  idResponsable: number;
+  fechaPrestamo?: string;
+  fechaEsperadaDevolucion: string;
+  fechaRealDevolucion?: string | null;
+  observaciones?: string | null;
+  observacionesDevolucion?: string | null;
+  usuarioRegistra: string;
+  usuarioRecibe?: string | null;
+  estado?: string;
+  
+  // Propiedades de navegación opcionales que podría devolver el backend
+  equipo?: Equipo;
+  responsable?: Responsable;
+}
+
+export interface DevolucionDTO {
+  fechaRealDevolucion: string;
+  observacionesDevolucion?: string | null;
+  usuarioRecibe: string;
 }
