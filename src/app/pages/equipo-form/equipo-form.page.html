@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+      <ion-back-button defaultHref="/tabs/equipos"></ion-back-button>
     </ion-buttons>
-    <ion-title>Registrar Equipo</ion-title>
+    <ion-title>Equipo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,38 +14,33 @@
         <ion-label color="medium">Información Básica</ion-label>
       </ion-list-header>
 
-      <!-- Código -->
       <ion-item>
-        <ion-input 
-          label="Código *" 
-          labelPlacement="floating" 
-          type="text" 
-          [(ngModel)]="equipo.codigo" 
-          name="codigo" 
+        <ion-label position="floating">Código *</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="equipo.codigo"
+          name="codigo"
           required>
         </ion-input>
       </ion-item>
 
-      <!-- Nombre Equipo -->
       <ion-item>
-        <ion-input 
-          label="Nombre de Equipo *" 
-          labelPlacement="floating" 
-          type="text" 
-          [(ngModel)]="equipo.nombreEquipo" 
-          name="nombreEquipo" 
+        <ion-label position="floating">Nombre de Equipo *</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="equipo.nombreEquipo"
+          name="nombreEquipo"
           required>
         </ion-input>
       </ion-item>
 
-      <!-- Descripción -->
       <ion-item>
-        <ion-textarea 
-          label="Descripción" 
-          labelPlacement="floating" 
-          [(ngModel)]="equipo.descripcion" 
-          name="descripcion" 
-          [autoGrow]="true">
+        <ion-label position="floating">Descripción *</ion-label>
+        <ion-textarea
+          autoGrow="true"
+          [(ngModel)]="equipo.descripcion"
+          name="descripcion"
+          required>
         </ion-textarea>
       </ion-item>
     </ion-list>
@@ -56,19 +51,43 @@
       </ion-list-header>
 
       <ion-item>
-        <ion-input label="Marca" labelPlacement="floating" type="text" [(ngModel)]="equipo.marca" name="marca"></ion-input>
+        <ion-label position="floating">Marca *</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="equipo.marca"
+          name="marca"
+          required>
+        </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Modelo" labelPlacement="floating" type="text" [(ngModel)]="equipo.modelo" name="modelo"></ion-input>
+        <ion-label position="floating">Modelo *</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="equipo.modelo"
+          name="modelo"
+          required>
+        </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Serie" labelPlacement="floating" type="text" [(ngModel)]="equipo.serie" name="serie"></ion-input>
+        <ion-label position="floating">Serie *</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="equipo.serie"
+          name="serie"
+          required>
+        </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Número de Activo" labelPlacement="floating" type="text" [(ngModel)]="equipo.numeroActivo" name="numeroActivo"></ion-input>
+        <ion-label position="floating">Número de Activo *</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="equipo.numeroActivo"
+          name="numeroActivo"
+          required>
+        </ion-input>
       </ion-item>
     </ion-list>
 
@@ -77,58 +96,105 @@
         <ion-label color="medium">Adquisición y Clasificación</ion-label>
       </ion-list-header>
 
-      <!-- Fecha Compra -->
       <ion-item>
-        <ion-input label="Fecha de Compra" labelPlacement="stacked" type="date" [(ngModel)]="equipo.fechaCompra" name="fechaCompra"></ion-input>
+        <ion-label position="floating">Fecha de Compra *</ion-label>
+        <ion-input
+          type="date"
+          [(ngModel)]="equipo.fechaCompra"
+          name="fechaCompra"
+          required>
+        </ion-input>
       </ion-item>
 
-      <!-- Valor Estimado -->
       <ion-item>
-        <ion-input label="Valor Estimado ($)" labelPlacement="floating" type="number" min="0" [(ngModel)]="equipo.valorEstimado" name="valorEstimado"></ion-input>
+        <ion-label position="floating">Valor Estimado *</ion-label>
+        <ion-input
+          type="number"
+          min="0"
+          [(ngModel)]="equipo.valorEstimado"
+          name="valorEstimado"
+          required>
+        </ion-input>
       </ion-item>
 
-      <!-- Foto URL -->
       <ion-item>
-        <ion-input label="URL de Foto" labelPlacement="floating" type="url" [(ngModel)]="equipo.fotoUrl" name="fotoUrl"></ion-input>
+        <ion-label position="floating">Foto URL *</ion-label>
+        <ion-input
+          type="url"
+          [(ngModel)]="equipo.fotoUrl"
+          name="fotoUrl"
+          required>
+        </ion-input>
       </ion-item>
 
-      <!-- Categoría -->
       <ion-item>
-        <ion-select label="Categoría *" labelPlacement="floating" [(ngModel)]="equipo.idCategoria" name="idCategoria" required interface="action-sheet">
-          @for (cat of categorias(); track cat.idCategoria) {
-            <ion-select-option [value]="cat.idCategoria">{{ cat.nombreCategoria }}</ion-select-option>
-          }
+        <ion-label position="floating">Categoría *</ion-label>
+        <ion-select
+          [(ngModel)]="equipo.idCategoria"
+          name="idCategoria"
+          required
+          interface="action-sheet">
+          <ion-select-option
+            *ngFor="let cat of categorias()"
+            [value]="cat.idCategoria">
+            {{ cat.nombreCategoria }}
+          </ion-select-option>
         </ion-select>
       </ion-item>
 
-      <!-- Ubicación -->
       <ion-item>
-        <ion-select label="Ubicación *" labelPlacement="floating" [(ngModel)]="equipo.idUbicacion" name="idUbicacion" required interface="action-sheet">
-          @for (ubi of ubicaciones(); track ubi.idUbicacion) {
-            <ion-select-option [value]="ubi.idUbicacion">{{ ubi.nombreUbicacion }}</ion-select-option>
-          }
+        <ion-label position="floating">Ubicación *</ion-label>
+        <ion-select
+          [(ngModel)]="equipo.idUbicacion"
+          name="idUbicacion"
+          required
+          interface="action-sheet">
+          <ion-select-option
+            *ngFor="let ubi of ubicaciones()"
+            [value]="ubi.idUbicacion">
+            {{ ubi.nombreUbicacion }}
+          </ion-select-option>
         </ion-select>
       </ion-item>
 
-      <!-- Estado Equipo -->
       <ion-item>
-        <ion-select label="Estado *" labelPlacement="floating" [(ngModel)]="equipo.idEstadoEquipo" name="idEstadoEquipo" required interface="action-sheet">
-          @for (est of estadosEquipo(); track est.idEstadoEquipo) {
-            <ion-select-option [value]="est.idEstadoEquipo">{{ est.nombreEstado }}</ion-select-option>
-          }
+        <ion-label position="floating">Estado *</ion-label>
+        <ion-select
+          [(ngModel)]="equipo.idEstadoEquipo"
+          name="idEstadoEquipo"
+          required
+          interface="action-sheet">
+          <ion-select-option
+            *ngFor="let estado of estadosEquipo()"
+            [value]="estado.idEstadoEquipo">
+            {{ estado.nombreEstado }}
+          </ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
 
     <ion-list lines="full" class="ion-margin-top">
+      <ion-list-header>
+        <ion-label color="medium">Observaciones y Estado</ion-label>
+      </ion-list-header>
+
       <ion-item>
-        <ion-textarea label="Observaciones" labelPlacement="floating" [(ngModel)]="equipo.observaciones" name="observaciones" [autoGrow]="true"></ion-textarea>
+        <ion-label position="floating">Observaciones *</ion-label>
+        <ion-textarea
+          autoGrow="true"
+          [(ngModel)]="equipo.observaciones"
+          name="observaciones"
+          required>
+        </ion-textarea>
       </ion-item>
 
-      <!-- Toggle Activo -->
-      <ion-item>
-        <ion-toggle [(ngModel)]="equipo.activo" name="activo" justify="space-between" color="success">
-          Equipo Activo
+      <ion-item lines="none">
+        <ion-label>Activo</ion-label>
+        <ion-toggle
+          slot="end"
+          color="success"
+          [(ngModel)]="equipo.activo"
+          name="activo">
         </ion-toggle>
       </ion-item>
     </ion-list>

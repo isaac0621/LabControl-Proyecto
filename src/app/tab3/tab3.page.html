@@ -1,17 +1,41 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Gestión de Préstamos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Spinner de carga -->
+  <div *ngIf="cargando" class="ion-text-center ion-padding">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando préstamos...</p>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- Mensaje si no hay préstamos -->
+  <div *ngIf="!cargando && prestamos.length === 0" class="ion-text-center ion-padding">
+    <ion-text color="medium">
+      <p>No hay préstamos registrados actualmente.</p>
+    </ion-text>
+  </div>
+
+  <!-- Lista de préstamos -->
+  <ion-list *ngIf="!cargando && prestamos.length > 0">
+    <ion-item *ngFor="let prestamo of prestamos">
+      <ion-label>
+        <h2>Equipo ID: {{ prestamo.idEquipo }}</h2>
+        <p>Responsable ID: {{ prestamo.idResponsable }}</p>
+        <p>Fecha Esperada: {{ prestamo.fechaEsperadaDevolucion | date:'shortDate' }}</p>
+      </ion-label>
+      <ion-badge slot="end" [color]="prestamo.fechaRealDevolucion ? 'success' : 'warning'">
+        {{ prestamo.fechaRealDevolucion ? 'Devuelto' : 'Pendiente' }}
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón flotante para agregar un nuevo préstamo -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="abrirModalPrestamo()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>
