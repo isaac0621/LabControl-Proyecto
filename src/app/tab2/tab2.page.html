@@ -1,17 +1,212 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab 2
+      Registrar Equipo
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Registrar Equipo</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <form #equipoForm="ngForm" (ngSubmit)="guardarEquipo()" novalidate class="custom-form">
+    
+    <ion-list lines="full" class="ion-margin-bottom">
+      <ion-list-header>
+        <ion-label color="medium">Información Principal</ion-label>
+      </ion-list-header>
+
+      <!-- Código -->
+      <ion-item>
+        <ion-input 
+          label="Código *" 
+          labelPlacement="stacked" 
+          type="text" 
+          [(ngModel)]="equipo.codigo" 
+          name="codigo" 
+          required 
+          #codigoCtrl="ngModel"
+          placeholder="Ej. EQ-001">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="codigoCtrl.invalid && (codigoCtrl.dirty || codigoCtrl.touched)">
+        <ion-text color="danger" *ngIf="codigoCtrl.errors?.['required']">El código es obligatorio.</ion-text>
+      </div>
+
+      <!-- Nombre -->
+      <ion-item>
+        <ion-input 
+          label="Nombre de Equipo *" 
+          labelPlacement="stacked" 
+          type="text" 
+          [(ngModel)]="equipo.nombreEquipo" 
+          name="nombreEquipo" 
+          required 
+          #nombreCtrl="ngModel"
+          placeholder="Ej. Microscopio Óptico">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="nombreCtrl.invalid && (nombreCtrl.dirty || nombreCtrl.touched)">
+        <ion-text color="danger" *ngIf="nombreCtrl.errors?.['required']">El nombre es obligatorio.</ion-text>
+      </div>
+
+      <!-- Descripción -->
+      <ion-item>
+        <ion-textarea 
+          label="Descripción" 
+          labelPlacement="stacked" 
+          [(ngModel)]="equipo.descripcion" 
+          name="descripcion"
+          placeholder="Descripción detallada del equipo..."
+          [autoGrow]="true">
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <ion-list lines="full" class="ion-margin-bottom">
+      <ion-list-header>
+        <ion-label color="medium">Especificaciones Técnicas</ion-label>
+      </ion-list-header>
+
+      <!-- Marca -->
+      <ion-item>
+        <ion-input label="Marca" labelPlacement="stacked" type="text" [(ngModel)]="equipo.marca" name="marca"></ion-input>
+      </ion-item>
+
+      <!-- Modelo -->
+      <ion-item>
+        <ion-input label="Modelo" labelPlacement="stacked" type="text" [(ngModel)]="equipo.modelo" name="modelo"></ion-input>
+      </ion-item>
+
+      <!-- Serie -->
+      <ion-item>
+        <ion-input label="Serie" labelPlacement="stacked" type="text" [(ngModel)]="equipo.serie" name="serie"></ion-input>
+      </ion-item>
+
+      <!-- Número de Activo -->
+      <ion-item>
+        <ion-input label="Número de Activo" labelPlacement="stacked" type="text" [(ngModel)]="equipo.numeroActivo" name="numeroActivo"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list lines="full" class="ion-margin-bottom">
+      <ion-list-header>
+        <ion-label color="medium">Adquisición y Clasificación</ion-label>
+      </ion-list-header>
+
+      <!-- Fecha de Compra -->
+      <ion-item>
+        <ion-input 
+          label="Fecha de Compra" 
+          labelPlacement="stacked" 
+          type="date" 
+          [(ngModel)]="equipo.fechaCompra" 
+          name="fechaCompra"
+          #fechaCtrl="ngModel">
+        </ion-input>
+      </ion-item>
+
+      <!-- Valor Estimado -->
+      <ion-item>
+        <ion-input 
+          label="Valor Estimado ($)" 
+          labelPlacement="stacked" 
+          type="number" 
+          min="0"
+          [(ngModel)]="equipo.valorEstimado" 
+          name="valorEstimado"
+          #valorCtrl="ngModel">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="valorCtrl.invalid && (valorCtrl.dirty || valorCtrl.touched)">
+        <ion-text color="danger" *ngIf="valorCtrl.errors?.['min']">El valor no puede ser negativo.</ion-text>
+      </div>
+
+      <!-- Categoría -->
+      <ion-item>
+        <ion-select 
+          label="Categoría *" 
+          labelPlacement="stacked" 
+          [(ngModel)]="equipo.idCategoria" 
+          name="idCategoria" 
+          required
+          #catCtrl="ngModel"
+          interface="action-sheet"
+          placeholder="Selecciona una categoría">
+          @for (cat of categorias(); track cat.idCategoria) {
+            <ion-select-option [value]="cat.idCategoria">{{ cat.nombreCategoria }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      <div class="error-message" *ngIf="catCtrl.invalid && (catCtrl.dirty || catCtrl.touched)">
+        <ion-text color="danger" *ngIf="catCtrl.errors?.['required']">Debes seleccionar una categoría.</ion-text>
+      </div>
+
+      <!-- Ubicación -->
+      <ion-item>
+        <ion-select 
+          label="Ubicación *" 
+          labelPlacement="stacked" 
+          [(ngModel)]="equipo.idUbicacion" 
+          name="idUbicacion" 
+          required
+          #ubiCtrl="ngModel"
+          interface="action-sheet"
+          placeholder="Selecciona una ubicación">
+          @for (ubi of ubicaciones(); track ubi.idUbicacion) {
+            <ion-select-option [value]="ubi.idUbicacion">{{ ubi.nombreUbicacion }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      <div class="error-message" *ngIf="ubiCtrl.invalid && (ubiCtrl.dirty || ubiCtrl.touched)">
+        <ion-text color="danger" *ngIf="ubiCtrl.errors?.['required']">Debes seleccionar una ubicación.</ion-text>
+      </div>
+
+      <!-- Estado Equipo -->
+      <ion-item>
+        <ion-select 
+          label="Estado *" 
+          labelPlacement="stacked" 
+          [(ngModel)]="equipo.idEstadoEquipo" 
+          name="idEstadoEquipo" 
+          required
+          #estadoCtrl="ngModel"
+          interface="action-sheet"
+          placeholder="Selecciona el estado actual">
+          @for (est of estadosEquipo(); track est.idEstadoEquipo) {
+            <ion-select-option [value]="est.idEstadoEquipo">{{ est.nombreEstado }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      <div class="error-message" *ngIf="estadoCtrl.invalid && (estadoCtrl.dirty || estadoCtrl.touched)">
+        <ion-text color="danger" *ngIf="estadoCtrl.errors?.['required']">El estado es obligatorio.</ion-text>
+      </div>
+    </ion-list>
+
+    <ion-list lines="full" class="ion-margin-bottom">
+      <!-- Observaciones -->
+      <ion-item>
+        <ion-textarea 
+          label="Observaciones" 
+          labelPlacement="stacked" 
+          [(ngModel)]="equipo.observaciones" 
+          name="observaciones"
+          placeholder="Notas adicionales..."
+          [autoGrow]="true">
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding-vertical submit-btn-wrapper">
+      <ion-button expand="block" type="submit" color="primary" shape="round">
+        <ion-icon slot="start" name="save-outline"></ion-icon>
+        Registrar Equipo
+      </ion-button>
+    </div>
+
+  </form>
 </ion-content>
