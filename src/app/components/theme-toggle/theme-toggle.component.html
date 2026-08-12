@@ -1,0 +1,12 @@
+<ion-item>
+  <ion-label>
+    <ion-icon [name]="isDarkMode ? 'moon' : 'sunny'" slot="start"></ion-icon>
+    {{ isDarkMode ? 'Tema Oscuro' : 'Tema Claro' }}
+  </ion-label>
+  <ion-toggle 
+    slot="end" 
+    [checked]="isDarkMode"
+    (ionChange)="toggleTheme()"
+    color="primary">
+  </ion-toggle>
+</ion-item>

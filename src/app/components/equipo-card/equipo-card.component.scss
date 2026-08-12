@@ -9,3 +9,12 @@
   justify-content: flex-end;
   margin-top: 8px;
 }
+
+// Estilos para tema oscuro
+:host-context(.dark-theme) {
+  ion-label {
+    p {
+      color: var(--ion-text-color);
+    }
+  }
+}

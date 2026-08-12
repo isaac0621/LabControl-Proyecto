@@ -1,0 +1,15 @@
+ion-item {
+  --background: var(--ion-item-background);
+  --border-bottom: 1px solid var(--ion-border-color);
+  
+  ion-icon {
+    margin-right: 8px;
+    font-size: 20px;
+  }
+}
+
+ion-toggle {
+  --handle-width: 26px;
+  --handle-height: 26px;
+  --handle-spacing: 2px;
+}

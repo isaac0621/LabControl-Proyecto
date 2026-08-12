@@ -1,3 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>LabControl</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateToSettings()">
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <!-- Tab 1: Listado y gestión de Equipos -->
@@ -20,3 +31,4 @@
   </ion-tab-bar>
 </ion-tabs>
     <!-- Tab 3: Gestión de Préstamos -->
+

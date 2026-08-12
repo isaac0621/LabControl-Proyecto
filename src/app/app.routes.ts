@@ -22,5 +22,9 @@ export const routes: Routes = [
   {
     path: 'prestamo-form',
     loadComponent: () => import('./pages/prestamo-form/prestamo-form.page').then( m => m.PrestamoFormPage)
+  },
+  {
+    path: 'settings',
+    loadComponent: () => import('./pages/settings/settings.page').then( m => m.SettingsPage)
   }
 ];
