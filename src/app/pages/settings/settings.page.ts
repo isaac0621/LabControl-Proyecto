@@ -7,7 +7,6 @@ import {
   IonToolbar,
   IonList,
   IonListHeader,
-  IonIcon,
   IonButtons,
   IonBackButton,
 } from '@ionic/angular/standalone';
@@ -28,7 +27,6 @@ import { ThemeToggleComponent } from '../../components/theme-toggle/theme-toggle
     IonToolbar,
     IonList,
     IonListHeader,
-    IonIcon,
     IonButtons,
     IonBackButton,
     ThemeToggleComponent,
