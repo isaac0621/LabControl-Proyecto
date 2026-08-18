@@ -1,13 +1,76 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>equipo-detalle</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/equipos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de Equipo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">equipo-detalle</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <div class="ion-text-center ion-padding" *ngIf="isLoading">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando información...</p>
+  </div>
+
+  <div class="ion-text-center ion-padding" *ngIf="hasError && !isLoading">
+    <ion-icon name="alert-circle-outline" color="danger" size="large"></ion-icon>
+    <p>Error al cargar el equipo o no se encontró.</p>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && equipo">
+    <ion-card>
+      <ion-card-header>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <ion-card-subtitle style="margin: 0; font-size: 1.1rem; color: var(--ion-color-medium);">
+            {{ equipo.codigo }}
+          </ion-card-subtitle>
+          <ion-badge [color]="getColorEstado(equipo.estadoEquipo)">
+            {{ equipo.estadoEquipo || 'Desconocido' }}
+          </ion-badge>
+        </div>
+        <ion-card-title>{{ equipo.nombreEquipo }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label class="ion-text-wrap">
+              <h3><strong>Marca / Modelo:</strong></h3>
+              <p>{{ equipo.marca || 'N/A' }} / {{ equipo.modelo || 'N/A' }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label class="ion-text-wrap">
+              <h3><strong>Número de Serie:</strong></h3>
+              <p>{{ equipo.serie || 'N/A' }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label class="ion-text-wrap">
+              <h3><strong>Categoría:</strong></h3>
+              <p>{{ equipo.categoria || 'N/A' }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label class="ion-text-wrap">
+              <h3><strong>Ubicación:</strong></h3>
+              <p>{{ equipo.ubicacion || 'N/A' }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item *ngIf="equipo.observaciones || equipo.descripcion">
+            <ion-label class="ion-text-wrap">
+              <h3><strong>Observaciones / Descripción:</strong></h3>
+              <p>{{ equipo.observaciones || equipo.descripcion }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

@@ -19,4 +19,5 @@ export interface Equipo {
   ubicacion?: string;
   idEstadoEquipo: number;
   estadoEquipo?: string;
+  creadoEnApp?: boolean;
 }

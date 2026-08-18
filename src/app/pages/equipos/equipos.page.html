@@ -54,7 +54,7 @@
           Detalle
         </ion-button>
         
-        <ion-button fill="clear" size="small" color="secondary" (click)="editarEquipo(equipo)">
+        <ion-button fill="clear" size="small" color="secondary" (click)="editarEquipo(equipo)" [disabled]="!equipo.creadoEnApp">
           <ion-icon slot="start" name="create-outline"></ion-icon>
           Editar
         </ion-button>

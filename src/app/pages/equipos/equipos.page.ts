@@ -99,15 +99,17 @@ export class EquiposPage implements OnInit {
   }
 
   verDetalle(equipo: Equipo) {
-    // Asumiendo que la ruta de detalle es /tabs/equipo-detalle/:id o similar
-    // this.router.navigate(['/tabs/equipo-detalle', equipo.idEquipo]);
-    console.log('Ver detalle:', equipo.idEquipo);
+    this.router.navigate(['/equipo-detalle', equipo.idEquipo]);
   }
 
   editarEquipo(equipo: Equipo) {
-    // Asumiendo que la ruta de edición es /tabs/equipo-form/:id
-    // this.router.navigate(['/tabs/equipo-form', equipo.idEquipo]);
-    console.log('Editar equipo:', equipo.idEquipo);
+    if (equipo.creadoEnApp) {
+      // Usamos query params o estado según esté configurado tu equipo-form,
+      // asumiendo que es la misma ruta de registrar-equipo
+      this.router.navigate(['/tabs/registrar-equipo'], { queryParams: { id: equipo.idEquipo } });
+    } else {
+      this.showToast('Solo se pueden editar equipos registrados en la aplicación', 'warning');
+    }
   }
 
   async confirmarEliminar(equipo: Equipo) {
