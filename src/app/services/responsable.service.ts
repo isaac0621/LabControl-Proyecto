@@ -7,7 +7,7 @@ import { Responsable } from '../models/responsable.model';
   providedIn: 'root'
 })
 export class ResponsableService {
-  private readonly apiUrl = 'http://apiweb-sac.somee.com/swagger/Responsables';
+private readonly apiUrl = 'http://apiweb-sac.somee.com/api/Responsables';
 
   constructor(private http: HttpClient) { }
 
