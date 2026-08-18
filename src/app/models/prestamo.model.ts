@@ -10,8 +10,8 @@ export interface Prestamo {
   fechaRealDevolucion?: string | null;
   observaciones?: string | null;
   observacionesDevolucion?: string | null;
-  usuarioRegistra: string;
-  usuarioRecibe?: string | null;
+  usuarioRegistra: number; // <-- Cambiado a number
+  usuarioRecibe?: number | null; // <-- Cambiado a number
   estado?: string;
   
   // Propiedades de navegación opcionales que podría devolver el backend

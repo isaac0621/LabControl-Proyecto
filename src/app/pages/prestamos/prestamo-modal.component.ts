@@ -36,7 +36,7 @@ import { Prestamo } from '../../models/prestamo.model';
         
         <ion-item>
           <ion-label position="stacked">Usuario Registra</ion-label>
-          <ion-input type="text" [(ngModel)]="prestamo.usuarioRegistra" name="usuarioRegistra" required></ion-input>
+          <ion-input type="number" [(ngModel)]="prestamo.usuarioRegistra" name="usuarioRegistra" required></ion-input>
         </ion-item>
 
         <ion-item>
@@ -55,11 +55,11 @@ import { Prestamo } from '../../models/prestamo.model';
 export class PrestamoModalComponent {
   private modalCtrl = inject(ModalController);
 
-  prestamo: Prestamo = {
+prestamo: Prestamo = {
     idEquipo: 0,
     idResponsable: 0,
     fechaEsperadaDevolucion: new Date().toISOString().split('T')[0],
-    usuarioRegistra: ''
+    usuarioRegistra: 1 // Número entero, no texto
   };
 
   cerrar() {
