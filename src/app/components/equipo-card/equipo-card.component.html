@@ -2,8 +2,8 @@
   <ion-card-header>
     <div class="header-container">
       <div>
-        <ion-card-subtitle>{{ equipo.codigo }} | {{ equipo.categoria || 'Sin categoría' }}</ion-card-subtitle>
-        <ion-card-title>{{ equipo.nombreEquipo }}</ion-card-title>
+        <ion-card-subtitle class="equipo-codigo">{{ equipo.codigo }} | {{ equipo.categoria || 'Sin categoría' }}</ion-card-subtitle>
+        <ion-card-title class="equipo-titulo">{{ equipo.nombreEquipo }}</ion-card-title>
       </div>
       <ion-badge [color]="getColorEstado(equipo.estadoEquipo)">
         {{ equipo.estadoEquipo || 'Desconocido' }}

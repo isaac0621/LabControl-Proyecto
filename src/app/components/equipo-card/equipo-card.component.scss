@@ -10,6 +10,25 @@
   margin-top: 8px;
 }
 
+ion-card-title,
+.equipo-titulo {
+  color: var(--ion-text-color) !important;
+}
+
+ion-card-subtitle,
+.equipo-codigo {
+  color: var(--ion-text-color) !important;
+  opacity: 0.7;
+}
+
+.action-buttons ion-button {
+  --color: #b8d7ff;
+}
+
+.action-buttons ion-button[color="danger"] {
+  --color: #ffb4ab;
+}
+
 // Estilos para tema oscuro
 :host-context(.dark-theme) {
   ion-label {

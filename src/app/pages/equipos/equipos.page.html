@@ -35,12 +35,12 @@
   <ion-card *ngFor="let equipo of filteredEquipos">
     <ion-card-header>
       <div class="card-header-flex">
-        <ion-card-subtitle>{{ equipo.codigo }}</ion-card-subtitle>
+        <ion-card-subtitle class="equipo-codigo">{{ equipo.codigo }}</ion-card-subtitle>
         <ion-badge [color]="getColorEstado(equipo.estadoEquipo)">
           {{ equipo.estadoEquipo || 'Desconocido' }}
         </ion-badge>
       </div>
-      <ion-card-title>{{ equipo.nombreEquipo }}</ion-card-title>
+      <ion-card-title class="equipo-titulo">{{ equipo.nombreEquipo }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -49,12 +49,12 @@
       <p><strong>Ubicación:</strong> {{ equipo.ubicacion || 'N/A' }}</p>
 
       <div class="action-buttons">
-        <ion-button fill="clear" size="small" color="primary" (click)="verDetalle(equipo)">
+        <ion-button class="btn-detalle" fill="clear" size="small" color="primary" (click)="verDetalle(equipo)">
           <ion-icon slot="start" name="eye-outline"></ion-icon>
           Detalle
         </ion-button>
         
-        <ion-button fill="clear" size="small" color="secondary" (click)="editarEquipo(equipo)" [disabled]="!equipo.creadoEnApp">
+        <ion-button class="btn-editar" fill="clear" size="small" color="secondary" (click)="editarEquipo(equipo)" [disabled]="!equipo.creadoEnApp">
           <ion-icon slot="start" name="create-outline"></ion-icon>
           Editar
         </ion-button>

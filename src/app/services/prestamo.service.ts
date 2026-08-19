@@ -1,31 +1,53 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { Prestamo, DevolucionDTO } from '../models/prestamo.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrestamoService {
-  private http = inject(HttpClient);
-  private apiUrl = `${environment.apiUrl}/api/Prestamos`;
+  private storageKey = 'prestamos_simulados';
 
-  constructor() { }
-
-  getPrestamos(): Observable<Prestamo[]> {
-    return this.http.get<Prestamo[]>(this.apiUrl);
+  constructor() {
+    if (!localStorage.getItem(this.storageKey)) {
+      localStorage.setItem(this.storageKey, JSON.stringify([]));
+    }
   }
 
-  getPrestamoById(id: number): Observable<Prestamo> {
-    return this.http.get<Prestamo>(`${this.apiUrl}/${id}`);
+  private getDatosLocal(): any[] {
+    return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
   }
 
-  createPrestamo(prestamo: Prestamo): Observable<Prestamo> {
-    return this.http.post<Prestamo>(this.apiUrl, prestamo);
+  private guardarDatosLocal(datos: any[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(datos));
+  }
+
+  getPrestamos(): Observable<any[]> {
+    return of(this.getDatosLocal()).pipe(delay(300));
+  }
+
+  getPrestamoById(id: number): Observable<any> {
+    const item = this.getDatosLocal().find((prestamo: any) => prestamo.id === id);
+    return of(item).pipe(delay(300));
+  }
+
+  createPrestamo(prestamo: any): Observable<any> {
+    const lista = this.getDatosLocal();
+    const nuevoPrestamo = {
+      ...prestamo,
+      id: Date.now(),
+      fecha: new Date().toLocaleDateString()
+    };
+    lista.unshift(nuevoPrestamo);
+    this.guardarDatosLocal(lista);
+    return of(nuevoPrestamo).pipe(delay(400));
   }
 
   devolverPrestamo(id: number, devolucion: DevolucionDTO): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}/devolver`, devolucion);
+    let lista = this.getDatosLocal();
+    lista = lista.filter((prestamo: any) => prestamo.id !== id);
+    this.guardarDatosLocal(lista);
+    return of({ success: true }).pipe(delay(300));
   }
 }

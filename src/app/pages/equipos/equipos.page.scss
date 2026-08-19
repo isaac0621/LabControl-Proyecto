@@ -19,6 +19,25 @@ ion-card {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+ion-card-title,
+.equipo-titulo {
+  color: var(--ion-text-color) !important;
+}
+
+ion-card-subtitle,
+.equipo-codigo {
+  color: var(--ion-text-color) !important;
+  opacity: 0.7;
+}
+
+.action-buttons ion-button {
+  --color: #b8d7ff;
+}
+
+.action-buttons ion-button[color="danger"] {
+  --color: #ffb4ab;
+}
+
 ion-card-content p {
   margin: 4px 0;
   color: var(--ion-text-color);

@@ -1,0 +1,53 @@
+.custom-form ion-list-header .section-title {
+	color: var(--ion-text-color) !important;
+}
+
+.custom-form ion-select {
+	--color: var(--ion-text-color);
+	--placeholder-color: var(--ion-color-medium);
+	--placeholder-opacity: 1;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.custom-form ion-select::part(icon) {
+	margin-left: auto;
+	color: var(--ion-text-color);
+	opacity: 1;
+}
+
+::ng-deep .equipo-select-action-sheet .action-sheet-group {
+	background: var(--ion-background-color);
+}
+
+::ng-deep .equipo-select-action-sheet .action-sheet-button {
+	color: var(--ion-text-color) !important;
+}
+
+::ng-deep .equipo-select-action-sheet .action-sheet-button ion-icon {
+	color: var(--ion-text-color) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+	.custom-form ion-list-header .section-title {
+		color: #ffffff !important;
+	}
+
+	.custom-form ion-select {
+		--color: #ffffff;
+		--placeholder-color: rgba(255, 255, 255, 0.7);
+	}
+
+	.custom-form ion-select::part(icon) {
+		color: #b8d7ff;
+	}
+
+	::ng-deep .equipo-select-action-sheet .action-sheet-group {
+		background: #1f2937;
+	}
+
+	::ng-deep .equipo-select-action-sheet .action-sheet-button,
+	::ng-deep .equipo-select-action-sheet .action-sheet-button ion-icon {
+		color: #ffffff !important;
+	}
+}
