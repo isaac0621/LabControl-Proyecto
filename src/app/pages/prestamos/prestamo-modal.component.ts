@@ -54,6 +54,7 @@ import { Responsable } from '../../models/responsable.model';
         </ion-select>
       </ion-item>
 
+<<<<<<< HEAD
       <ion-item>
         <ion-select
           label="Responsable"
@@ -66,6 +67,17 @@ import { Responsable } from '../../models/responsable.model';
           </ion-select-option>
         </ion-select>
       </ion-item>
+=======
+        <ion-item>
+          <ion-label position="stacked">Fecha Esperada Devolución</ion-label>
+          <ion-input type="date" [(ngModel)]="prestamo.fechaEsperadaDevolucion" name="fechaEsperada" required></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Usuario Registra</ion-label>
+          <ion-input type="number" [(ngModel)]="prestamo.usuarioRegistra" name="usuarioRegistra" required></ion-input>
+        </ion-item>
+>>>>>>> 02b63d6cb8b2b478a0938e8408965d2daff9ff61
 
       <ion-button
         expand="block"
@@ -83,6 +95,7 @@ export class PrestamoModalComponent implements OnInit {
   private equipoService = inject(EquipoService);
   private responsableService = inject(ResponsableService);
 
+<<<<<<< HEAD
   equipos: Equipo[] = [];
   responsables: Responsable[] = [];
 
@@ -90,6 +103,13 @@ export class PrestamoModalComponent implements OnInit {
     nombre: '',
     idEquipo: null as number | null,
     idResponsable: null as number | null
+=======
+prestamo: Prestamo = {
+    idEquipo: 0,
+    idResponsable: 0,
+    fechaEsperadaDevolucion: new Date().toISOString().split('T')[0],
+    usuarioRegistra: 1 // Número entero, no texto
+>>>>>>> 02b63d6cb8b2b478a0938e8408965d2daff9ff61
   };
 
   ngOnInit() {
